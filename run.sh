@@ -4,10 +4,9 @@
 echo "Pulling MySQL image"
 docker pull mysql
 
-#echo "Pulling latest ArchivesSpace build image"
-#docker pull lyrasis/archivesspace
-echo "Démarrer le contenant temastres."
-#docker start tematres-test
+# Contruire notre contenant tematres.
+echo "Contruire notre contenant tematres."
+docker build -t ARV3054/tematres .
 
 echo "Starting MySQL instance in background"
 docker run -d \
@@ -24,8 +23,9 @@ echo "Waiting for MySQL to initialize"
 sleep 30
 
 echo "Démarrage de tematres en tâche de fonds."
-docker run --name tematres-test -d \
-  -p 80:80 \
+docker run -d \
+  -p 80:80
+  --name tematres-test \
   -e TEMATRES_DB_TYPE=mysql \
   --link mysql:db \
-  7a0c3a3f5ec3
+  ARV3054/tematres
