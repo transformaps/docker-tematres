@@ -6,7 +6,7 @@ docker pull mysql
 
 # Contruire notre contenant tematres.
 echo "Contruire notre contenant tematres."
-docker build -t arv3054/tematres .
+#docker build -t arv3054/tematres .
 
 echo "Starting MySQL instance in background"
 docker run -d \
@@ -25,7 +25,7 @@ sleep 30
 echo "Démarrage de tematres en tâche de fonds."
 docker run -d \
   -p 80:80 \
-  --name tematres-test \
+  --name tematres2 \
   -e TEMATRES_DB_TYPE=mysql \
   --link mysql:db \
   arv3054/tematres
