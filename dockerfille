@@ -1,0 +1,26 @@
+FROM ubuntu:latest
+
+MAINTAINER Dominic Boisvert <dominic.boisvert@hbarchivistes.qc.ca>
+
+# Variables pour notre dockerfile.
+ENV TEMATRES_URL https://github.com/tematres/TemaTres-Vocabulary-Server.git
+
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+  apache2 \
+  git \
+  mysql-server \
+  php5 \
+  unzip
+
+RUN mkdir /var/www/html/tematres
+RUN git clone $TEMATRES_URL /var/www/html/tematres
+
+RUN chown -R www-data:www-data /var/www/html/tematres/
+
+EXPOSE 80
+
+ADD start.sh /start.sh
+RUN chmod u+x /*.sh
+
+CMD ["/start.sh"]
