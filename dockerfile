@@ -7,8 +7,8 @@ ENV TEMATRES_URL https://codeload.github.com/tematres/TemaTres-Vocabulary-Server
 
 ENV TEMATRES_DB_TYPE demo
 ENV TEMATRES_DB_NAME tematres
-ENV TEMATRES_DB_USER tematres_user
-ENV TEMATRES_DB_PASS tematres_pass
+ENV TEMATRES_DB_USER root
+ENV TEMATRES_DB_PASS 123456
 
 # Pour mettre à jour les dépôts et installer les paquets nécessaires.
 RUN apt-get update
@@ -21,11 +21,15 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
 
 # Pour télcharger, placer tematres au bon endroit et donner les bons droits pour le serveur Web.
 ADD $TEMATRES_URL /
-RUN mkdir /var/www/html/temastres
+RUN mkdir /var/www/html/tematres
 RUN unzip master
-RUN mv TemaTres-Vocabulary-Server-master/ /var/www/html/temastres
+RUN mv TemaTres-Vocabulary-Server-master/ /var/www/html/tematres
 RUN rm master
-#RUN chown -R www-data:www-data /var/www/html/temastres
+RUN chown -R www-data:www-data /var/www/html/tematres
+
+# Pour configurer l'accès à la base de données.
+
+RUN sed -i 's/$DBCFG["DBPass"] = "";/$DBCFG["DBPass"] = "123456";/g' /var/www/html/tematres/vocab/db.tematres.php
 
 # Pour démarrer le serveur Web.
 #RUN service apache2 start

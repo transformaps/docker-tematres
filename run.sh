@@ -14,7 +14,7 @@ docker run -d \
   --name mysql \
   -e MYSQL_ROOT_PASSWORD=123456 \
   -e MYSQL_DATABASE=tematres \
-  -e MYSQL_USER=tematres_user \
+  -e MYSQL_USER=root \
   -e MYSQL_PASSWORD=tematres_pass \
   mysql
 
