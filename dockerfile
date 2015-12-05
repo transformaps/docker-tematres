@@ -26,7 +26,7 @@ RUN apt-get -y install --no-install-recommends \
 WORKDIR /var/www/html
 
 # Pour télécharger, placer tematres au bon endroit et donner les bons droits pour le serveur Web.
-ADD $TEMATRES_URL /
+ADD $TEMATRES_URL /var/www/html/
 RUN unzip master
 RUN rm master
 RUN mv TemaTres-Vocabulary-Server-master tematres
