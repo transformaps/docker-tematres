@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM dockie/lamp
 
 MAINTAINER Dominic Boisvert <dominic.boisvert@hbarchivistes.qc.ca>
 
@@ -9,15 +9,11 @@ ENV TEMATRES_URL https://codeload.github.com/tematres/TemaTres-Vocabulary-Server
 ENV TEMATRES_DB_TYPE demo
 ENV TEMATRES_DB_NAME tematres
 ENV TEMATRES_DB_USER root
-ENV TEMATRES_DB_PASS 123456
+ENV TEMATRES_DB_PASS root
 
 # Pour mettre à jour les dépôts et installer les paquets nécessaires et faire le ménage.
 RUN apt-get update
 RUN apt-get -yq install --no-install-recommends \
-  apache2 \
-  git \
-  mysql-client \
-  php5 \
   unzip && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* \
@@ -35,7 +31,7 @@ RUN mv TemaTres-Vocabulary-Server-master tematres
 RUN chown -R www-data:www-data tematres
 
 # Pour configurer l'accès à la base de données.
-RUN sed -i "s/$DBCFG["DBPass"] = "";/$DBCFG["DBPass"] = "123456";/g" /vocab/db.tematres.php
+RUN sed -i "s/$DBCFG["DBPass"] = "";/$DBCFG["DBPass"] = "root";/g" /vocab/db.tematres.php
 
 # Pour démarrer le serveur Web.
 #RUN service apache2 start
