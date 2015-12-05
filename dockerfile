@@ -7,7 +7,7 @@ ENV TEMATRES_URL https://codeload.github.com/tematres/TemaTres-Vocabulary-Server
 #ENV TEMATRES_DB_TYPE demo
 #ENV TEMATRES_DB_NAME tematres
 #ENV TEMATRES_DB_USER root
-#ENV TEMATRES_DB_PASS 
+#ENV TEMATRES_DB_PASS
 ENV DEBIAN_FRONTEND noninteractive
 
 # Pour mettre à jour les dépôts et installer les paquets nécessaires et faire le ménage.
@@ -30,10 +30,10 @@ RUN apt-get update && \
 
 # Pour télécharger, placer tematres au bon endroit et donner les bons droits pour le serveur Web.
 ADD $TEMATRES_URL /var/www/html/
-RUN unzip /var/www/html/master
-#RUN rm master
-RUN mv TemaTres-Vocabulary-Server-master tematres
-RUN chown -R www-data:www-data tematres
+RUN unzip /var/www/html/master &&\
+  rm master && \
+mv TemaTres-Vocabulary-Server-master tematres && \
+chown -R www-data:www-data tematres
 
 # Diverses configurations.
 ADD start-apache2.sh /start-apache2.sh
@@ -44,15 +44,12 @@ ADD my.cnf /etc/mysql/conf.d/my.cnf
 ADD supervisord-apache2.conf /etc/supervisor/conf.d/supervisord-apache2.conf
 ADD supervisord-mysqld.conf /etc/supervisor/conf.d/supervisord-mysqld.conf
 
-# Retirer la base de données pré-installée
-#RUN rm -rf /var/lib/mysql/*
-
 # Ajouter les utilitaires MySQL.
 #ADD create_mysql_admin_user.sh /create_mysql_admin_user.sh
 #RUN chmod 755 /*.sh
 
 # Pour créer notre base de données.
-RUN mysql -uroot -p "CREATE DATABASE tematres CHARACTER SET utf8 COLLATE utf8_general_ci;"
+RUN mysql -uroot -e "CREATE DATABASE tematres CHARACTER SET utf8 COLLATE utf8_general_ci;"
 
 # Pour que notre installation de Tematres soit accessible à 0.0.0.0:80/tematres
 EXPOSE 80 3306
