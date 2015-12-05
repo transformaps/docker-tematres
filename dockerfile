@@ -4,10 +4,10 @@ MAINTAINER Dominic Boisvert <dominic.boisvert@hbarchivistes.qc.ca>
 
 # Variables pour notre dockerfile.
 ENV TEMATRES_URL https://codeload.github.com/tematres/TemaTres-Vocabulary-Server/zip/master
-ENV TEMATRES_DB_TYPE demo
-ENV TEMATRES_DB_NAME tematres
-ENV TEMATRES_DB_USER root
-ENV TEMATRES_DB_PASS root
+#ENV TEMATRES_DB_TYPE demo
+#ENV TEMATRES_DB_NAME tematres
+#ENV TEMATRES_DB_USER root
+#ENV TEMATRES_DB_PASS 
 ENV DEBIAN_FRONTEND noninteractive
 
 # Pour mettre à jour les dépôts et installer les paquets nécessaires et faire le ménage.
@@ -28,6 +28,13 @@ RUN apt-get update && \
   /tmp/* \
   /var/tmp/*
 
+# Pour télécharger, placer tematres au bon endroit et donner les bons droits pour le serveur Web.
+ADD $TEMATRES_URL /var/www/html/
+RUN unzip /var/www/html/master
+#RUN rm master
+RUN mv TemaTres-Vocabulary-Server-master tematres
+RUN chown -R www-data:www-data tematres
+
 # Diverses configurations.
 ADD start-apache2.sh /start-apache2.sh
 ADD start-mysqld.sh /start-mysqld.sh
@@ -41,24 +48,8 @@ ADD supervisord-mysqld.conf /etc/supervisor/conf.d/supervisord-mysqld.conf
 #RUN rm -rf /var/lib/mysql/*
 
 # Ajouter les utilitaires MySQL.
-ADD create_mysql_admin_user.sh /create_mysql_admin_user.sh
-RUN chmod 755 /*.sh
-
-# Pour télécharger, placer tematres au bon endroit et donner les bons droits pour le serveur Web.
-
-ADD $TEMATRES_URL /var/www/html/
-RUN unzip /var/www/html/master
-#RUN rm master
-RUN mv TemaTres-Vocabulary-Server-master tematres
-RUN chown -R www-data:www-data tematres
-
-# Pour configurer l'accès à la base de données.
-# Ne semble plus nécessaire puisque root n'a pas de mot de passe.
-# RUN cd /tematres/vocab/ && sed -e '40s/""/"root"/' db.tematres.php
-
-# Pour démarrer le serveur Web et le serveur de base de données.
-#RUN service apache2 start
-#RUN service mysql start
+#ADD create_mysql_admin_user.sh /create_mysql_admin_user.sh
+#RUN chmod 755 /*.sh
 
 # Pour créer notre base de données.
 RUN mysql -uroot -p "CREATE DATABASE tematres CHARACTER SET utf8 COLLATE utf8_general_ci;"
