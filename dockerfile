@@ -2,8 +2,6 @@ FROM dockie/lamp
 
 MAINTAINER Dominic Boisvert <dominic.boisvert@hbarchivistes.qc.ca>
 
-# Pour plus de portabilité, la base de données est dans un second contenant.
-
 # Variables pour notre dockerfile.
 ENV TEMATRES_URL https://codeload.github.com/tematres/TemaTres-Vocabulary-Server/zip/master
 ENV TEMATRES_DB_TYPE demo
@@ -20,21 +18,24 @@ RUN apt-get -yq install --no-install-recommends \
   /tmp/* \
   /var/tmp/*
 
-# Notre répertoire de travail.
-WORKDIR /var/www/html
-
 # Pour télécharger, placer tematres au bon endroit et donner les bons droits pour le serveur Web.
+
 ADD $TEMATRES_URL /var/www/html/
-RUN unzip master
-RUN rm master
+RUN unzip /var/www/html/master
+#RUN rm master
 RUN mv TemaTres-Vocabulary-Server-master tematres
 RUN chown -R www-data:www-data tematres
 
 # Pour configurer l'accès à la base de données.
-RUN sed -i "s/$DBCFG["DBPass"] = "";/$DBCFG["DBPass"] = "root";/g" /vocab/db.tematres.php
+cat /var/www/html/tematres/vocab/db.tematres.php | \
+sed -e 's/$DBCFG["DBPass"] = ""/;/$DBCFG["DBPass"] = "root"/' > /var/www/html/tematres/vocab/db.tematres.php
 
 # Pour démarrer le serveur Web.
-#RUN service apache2 start
+RUN service apache2 start && \
+    service mysql start
+
+# Nous allons maintenant créer notre base de données. Notez que la pratique d'utiliser le mot de passe dans la commande n'est pas sécuritaire, mais ici ce n'est pas important.
+RUN mysql -uroot -proot -e "CREATE DATABASE tematres CHARACTER SET utf8 COLLATE utf8_bin;"
 
 # Pour que notre installation de Tematres soit accessible à 0.0.0.0:80/tematres
 EXPOSE 80
