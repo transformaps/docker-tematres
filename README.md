@@ -15,7 +15,7 @@ Les instructions ont été développées et testées sous Linux. Les instruction
 
 Pour lancer l'installation.
 
-sudo docker build -t <votrenom>/tematres .
+sudo docker build -t arv3054/tematres .
 
 ### Pour lancer le contenant
 
