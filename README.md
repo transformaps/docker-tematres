@@ -23,7 +23,7 @@ sudo docker build -t arv3054/tematres .
 
 ### Pour lancer le contenant
 
-Au premier démarrage, utiliser la commande suivante : sudo docker run -i -t -d tematres ubuntu:latest
+Au premier démarrage, utiliser la commande suivante : sudo docker run -i -t -d -p 80:80 tematres arv3054/tematres
 
 Par la suite : sudo docker start tematres
 
