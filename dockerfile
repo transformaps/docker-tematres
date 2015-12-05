@@ -2,6 +2,8 @@ FROM ubuntu:latest
 
 MAINTAINER Dominic Boisvert <dominic.boisvert@hbarchivistes.qc.ca>
 
+# Pour plus de portabilité, la base de données est dans un second contenant.
+
 # Variables pour notre dockerfile.
 ENV TEMATRES_URL https://codeload.github.com/tematres/TemaTres-Vocabulary-Server/zip/master
 ENV TEMATRES_DB_TYPE demo
@@ -14,17 +16,13 @@ RUN apt-get update
 RUN apt-get -yq install --no-install-recommends \
   apache2 \
   git \
-  mysql-server \
+  mysql-client \
   php5 \
   unzip && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* \
   /tmp/* \
   /var/tmp/*
-
-ADD mysql_run.sh /tmp/mysql_run.sh
-RUN chmod +x /tmp/mysql_run.sh
-RUN ./tmp/mysql_run.sh
 
 # Notre répertoire de travail.
 WORKDIR /var/www/html
@@ -37,7 +35,7 @@ RUN mv TemaTres-Vocabulary-Server-master tematres
 RUN chown -R www-data:www-data tematres
 
 # Pour configurer l'accès à la base de données.
-#RUN sed -i "s/$DBCFG["DBPass"] = "";/$DBCFG["DBPass"] = "123456";/g" /vocab/db.tematres.php
+RUN sed -i "s/$DBCFG["DBPass"] = "";/$DBCFG["DBPass"] = "123456";/g" /vocab/db.tematres.php
 
 # Pour démarrer le serveur Web.
 #RUN service apache2 start
