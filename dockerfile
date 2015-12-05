@@ -61,7 +61,7 @@ RUN chown -R www-data:www-data tematres
 #RUN service mysql start
 
 # Pour créer notre base de données.
-RUN mysql -uroot -e "CREATE DATABASE tematres CHARACTER SET utf8 COLLATE utf8_general_ci;"
+RUN mysql -uroot -p "CREATE DATABASE tematres CHARACTER SET utf8 COLLATE utf8_general_ci;"
 
 # Pour que notre installation de Tematres soit accessible à 0.0.0.0:80/tematres
 EXPOSE 80 3306
