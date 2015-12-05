@@ -9,25 +9,31 @@ ENV TEMATRES_DB_NAME tematres
 ENV TEMATRES_DB_USER root
 ENV TEMATRES_DB_PASS 123456
 
-# Pour mettre à jour les dépôts et installer les paquets nécessaires.
+# Pour mettre à jour les dépôts et installer les paquets nécessaires et faire le ménage.
 RUN apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+RUN apt-get -y install --no-install-recommends \
   apache2 \
   git \
   mysql-client \
   php5 \
-  unzip
+  unzip && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/* \
+  /tmp/* \
+  /var/tmp/*
 
-# Pour télcharger, placer tematres au bon endroit et donner les bons droits pour le serveur Web.
+# Notre répertoire de travail.
+WORKDIR /var/www/html
+
+# Pour télécharger, placer tematres au bon endroit et donner les bons droits pour le serveur Web.
 ADD $TEMATRES_URL /
-RUN mkdir /var/www/html/tematres
-RUN unzip master -d /var/www/html
+RUN unzip master
 RUN rm master
-RUN mv /var/www/html/TemaTres-Vocabulary-Server-master tematres
-RUN chown -R www-data:www-data /var/www/html/tematres
+RUN mv TemaTres-Vocabulary-Server-master tematres
+RUN chown -R www-data:www-data tematres
 
 # Pour configurer l'accès à la base de données.
-#RUN sed -i 's/$DBCFG["DBPass"] = "";/$DBCFG["DBPass"] = "123456";/g' /var/www/html/tematres/vocab/db.tematres.php
+#RUN sed -i 's/$DBCFG["DBPass"] = "";/$DBCFG["DBPass"] = "123456";/g' /vocab/db.tematres.php
 
 # Pour démarrer le serveur Web.
 #RUN service apache2 start
