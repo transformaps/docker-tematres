@@ -29,7 +29,7 @@ Pour arrêter le contenant : sudo docker stop tematres
 
 Lors du premier lancement de Tematres, et à toutes les fois que vous aurez effacé le contenant (avec la commande sudo docker rm tematres) vous devrez procéder à la configuration initiale de Tematres.
 
-1. Dans votre navigateur, visiter l'URL 0.0.0.0
+1. Dans votre navigateur, visiter l'URL 0.0.0.0/tematres
 2. Sélectionner la langue (linguo) française
 3. Le nom d'usager par défaut est « docker » (sans les guillements)
 4. Le mot de passe par défaut est  « docker » (sans les guillements)
