@@ -40,9 +40,3 @@ RUN chown -R www-data:www-data tematres
 
 # Pour que notre installation de Tematres soit accessible à 0.0.0.0:80/tematres
 EXPOSE 80
-
-# Pour configurer la base de données
-#ADD setup.sh /setup.sh
-#RUN chmod u+x /*.sh
-
-#CMD ["/setup.sh"]
