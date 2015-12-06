@@ -1,3 +1,5 @@
+# Pour le cours ARV3054, idéalement vous devrions utiliser la fonctionnalité de liaison entre les contenants.
+
 FROM ubuntu:latest
 
 MAINTAINER Dominic Boisvert <dominic.boisvert@hbarchivistes.qc.ca>
