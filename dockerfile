@@ -5,9 +5,9 @@ MAINTAINER Dominic Boisvert <dominic.boisvert@hbarchivistes.qc.ca>
 # Variables pour notre dockerfile.
 ENV TEMATRES_URL https://codeload.github.com/tematres/TemaTres-Vocabulary-Server/zip/master
 #ENV TEMATRES_DB_TYPE demo
-#ENV TEMATRES_DB_NAME tematres
-#ENV TEMATRES_DB_USER root
-#ENV TEMATRES_DB_PASS
+ENV TEMATRES_DB_NAME tematres
+ENV TEMATRES_DB_USER root
+ENV TEMATRES_DB_PASS root
 ENV DEBIAN_FRONTEND noninteractive
 
 # Pour mettre à jour les dépôts et installer les paquets nécessaires et faire le ménage.
@@ -45,8 +45,8 @@ ADD my.cnf /etc/mysql/conf.d/my.cnf
 ADD supervisord-apache2.conf /etc/supervisor/conf.d/supervisord-apache2.conf
 ADD supervisord-mysqld.conf /etc/supervisor/conf.d/supervisord-mysqld.conf
 
-# Pour créer notre base de données.
-#RUN mysql -uroot -e "CREATE DATABASE tematres CHARACTER SET utf8 COLLATE utf8_general_ci;"
+# Pour configurer la connexion de tematres à notre base de données.
+RUN sed -i '40s/""/"root"/' /var/www/html/tematres/vocab/db.tematres.php
 
 # Pour que notre installation de Tematres soit accessible à 0.0.0.0:80/tematres
 EXPOSE 80 3306
