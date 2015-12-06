@@ -28,7 +28,7 @@ Vous pouvez arrêter votre contenant avec la commande suivante : `$ sudo docker 
 
 Si vous souhaitez démarrer votre contenant (que vous avez arrêté avec la commande `stop`) : `$ sudo docker start tematres`
 
-### configurations suite au premier démarrage de Tematres
+### Configuration au premier démarrage de Tematres
 
 Lors du premier démarrage de Tematres, et à toutes les fois que vous aurez effacé le contenant (avec la commande `$ sudo docker rm tematres`) vous devrez procéder à la configuration initiale de Tematres[1].
 
