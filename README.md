@@ -39,4 +39,4 @@ Lors du premier démarrage de Tematres, et à toutes les fois que vous aurez eff
 4. Le mot de passe par défaut est  « docker » (sans les guillements)
 5. L'adresse courriel de l'usager est  « docker@localhost.local » (sans les guillements)
 
-[1] La configuration est nécessaire, mais vous pouvez insrire les informations de votre choix.
+[1] La configuration est nécessaire, mais vous pouvez inscrire les informations de votre choix.
