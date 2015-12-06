@@ -1,10 +1,6 @@
 # docker-tematres
 Dockerfile pour Tematres
 
-*Attention*
-
-*Fonctionne en pièces détachées, mais pas sous forme de dockerfile !*
-
 ## Utiliser ce projet
 
 Ce projet est développé et maintenu pour faciliter la prise en main de logiciels dans le cadre du cours ARV3054 - Gestion des archives numériques offert par l'[École de bibliothéconomie et des sciences de l'information] (http://www.ebsi.umontreal.ca/accueil/) de l'[Université de Montrêal] (http://www.umontreal.ca).
