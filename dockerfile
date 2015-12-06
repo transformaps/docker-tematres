@@ -37,13 +37,12 @@ RUN mkdir -p /var/www/html/ \
 # Diverses configurations.
 ADD start-apache2.sh /start-apache2.sh
 ADD start-mysqld.sh /start-mysqld.sh
-ADD create-db.sh /create-db.sh
+ADD create-tematres-db.sh /create-tematres-db.sh
 ADD run.sh /run.sh
 RUN chmod 755 /*.sh
 ADD my.cnf /etc/mysql/conf.d/my.cnf
 ADD supervisord-apache2.conf /etc/supervisor/conf.d/supervisord-apache2.conf
 ADD supervisord-mysqld.conf /etc/supervisor/conf.d/supervisord-mysqld.conf
-RUN create-db.sh
 
 # Pour configurer la connexion de tematres à notre base de données.
 #RUN sed -i '40s/""/"root"/' /var/www/html/tematres/vocab/db.tematres.php
