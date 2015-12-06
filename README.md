@@ -25,6 +25,10 @@ sudo docker build -t arv3054/tematres .
 
 Au premier démarrage, utiliser la commande suivante : sudo docker run -i -t -d -p 80:80 --name tematres arv3054/tematres
 
+ou
+
+sudo docker run -i -t -p 80:80 --name tematres2 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=tematres -d arv3054/tematres
+
 Par la suite : sudo docker start tematres
 
 Pour arrêter le contenant : sudo docker stop tematres

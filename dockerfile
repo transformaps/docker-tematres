@@ -4,7 +4,6 @@ MAINTAINER Dominic Boisvert <dominic.boisvert@hbarchivistes.qc.ca>
 
 # Variables pour notre dockerfile.
 ENV TEMATRES_URL https://codeload.github.com/tematres/TemaTres-Vocabulary-Server/zip/master
-#ENV TEMATRES_DB_TYPE demo
 ENV TEMATRES_DB_NAME tematres
 ENV TEMATRES_DB_USER root
 ENV TEMATRES_DB_PASS root
@@ -19,7 +18,6 @@ RUN apt-get update && \
   php-apc \
   php5-mcrypt \
   php5-mysql \
-  pwgen \
   supervisor \
   unzip \
   wget && \
@@ -39,14 +37,16 @@ RUN mkdir -p /var/www/html/ \
 # Diverses configurations.
 ADD start-apache2.sh /start-apache2.sh
 ADD start-mysqld.sh /start-mysqld.sh
+ADD create-db.sh /create-db.sh
 ADD run.sh /run.sh
 RUN chmod 755 /*.sh
 ADD my.cnf /etc/mysql/conf.d/my.cnf
 ADD supervisord-apache2.conf /etc/supervisor/conf.d/supervisord-apache2.conf
 ADD supervisord-mysqld.conf /etc/supervisor/conf.d/supervisord-mysqld.conf
+RUN create-db.sh
 
 # Pour configurer la connexion de tematres à notre base de données.
-RUN sed -i '40s/""/"root"/' /var/www/html/tematres/vocab/db.tematres.php
+#RUN sed -i '40s/""/"root"/' /var/www/html/tematres/vocab/db.tematres.php
 
 # Pour que notre installation de Tematres soit accessible à 0.0.0.0:80/tematres
 EXPOSE 80 3306
