@@ -11,29 +11,32 @@ Pour utiliser ce projet vous devez installer [Docker] (http://docs.docker.com/ma
 
 Les instructions ont été développées et testées sous Linux. Les instructions Windows et Mac OS X suivront.
 
-### Dockerfile
+### Installation Linux
 
-Pour lancer l'installation.
+Les instructions suivantes permettent d'installer et de faire la configuration initile.
 
-`$ sudo docker build -t arv3054/tematres .`
+1. Télécharger le zip de ce projet
+2. Pour lancer l'installation : `$ sudo docker build -t arv3054/tematres .`
+3. Pour lancer le contenant : `$ sudo docker run -i -t -d -p 80:80 --name tematres arv3054/tematres`
+4. Puis pour créer la base de données faire : `$ sudo docker exec -i -t tematres /create-tematres-db.sh`
 
-### Pour lancer le contenant
+Vous pouvez maintenant visiter votre thésaurus à l'URL : `0.0.0.0/tematres`
 
-Au premier démarrage, utiliser la commande suivante : `$ sudo docker run -i -t -d -p 80:80 --name tematres arv3054/tematres`
+Vous pouvez arrêter votre contenant avec la commande suivante : `$ sudo docker stop tematres`
 
-Puis pour créer la base de données faire : `$ sudo docker exec -i -t tematres /create-tematres-db.sh`
+### Démarrer le contenant existant
 
-Pour arrêter le contenant : `$ sudo docker stop tematres`
+Si vous souhaiter démarrer votre contenant (que vous avez arrêté avec ls commande Pour arrêter le contenant : `stop`) : `$ sudo docker start tematres`
 
-Pour démarrer le contenant par la suite : `$ sudo docker start tematres`
+### configurations suite au premier démarrage de Tematres
 
-### configurations suite au premier lancement de Tematres
+Lors du premier démarrage de Tematres, et à toutes les fois que vous aurez effacé le contenant (avec la commande `$ sudo docker rm tematres`) vous devrez procéder à la configuration initiale de Tematres[1].
 
-Lors du premier lancement de Tematres, et à toutes les fois que vous aurez effacé le contenant (avec la commande sudo docker rm tematres) vous devrez procéder à la configuration initiale de Tematres.
-
-1. Dans votre navigateur, visiter l'URL 0.0.0.0/tematres
+1. Dans votre navigateur, visiter l'URL `0.0.0.0/tematres`
 2. Sélectionner la langue (linguo) française
 3. Le nom du site est : Thésaurus - ARV3054
 3. Le nom d'usager par défaut est « docker » (sans les guillements)
 4. Le mot de passe par défaut est  « docker » (sans les guillements)
 5. L'adresse courriel de l'usager est  « docker@localhost.local » (sans les guillements)
+
+[1] La configuration est nécessaire, mais vous pouvez insrire les informations de votre choix.
