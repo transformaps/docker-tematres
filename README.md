@@ -15,17 +15,17 @@ Les instructions ont été développées et testées sous Linux. Les instruction
 
 Pour lancer l'installation.
 
-$ sudo docker build -t arv3054/tematres .
+`$ sudo docker build -t arv3054/tematres .`
 
 ### Pour lancer le contenant
 
-Au premier démarrage, utiliser la commande suivante : $ sudo docker run -i -t -d -p 80:80 --name tematres arv3054/tematres
+Au premier démarrage, utiliser la commande suivante : `$ sudo docker run -i -t -d -p 80:80 --name tematres arv3054/tematres`
 
-Puis pour créer la base de données faire : $ sudo docker exec -i -t tematres /create-tematres-db.sh
+Puis pour créer la base de données faire : `$ sudo docker exec -i -t tematres /create-tematres-db.sh`
 
-Pour arrêter le contenant : $ sudo docker stop tematres
+Pour arrêter le contenant : `$ sudo docker stop tematres`
 
-Pour démarrer le contenant par la suite : $ sudo docker start tematres
+Pour démarrer le contenant par la suite : `$ sudo docker start tematres`
 
 ### configurations suite au premier lancement de Tematres
 
