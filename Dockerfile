@@ -46,9 +46,6 @@ ADD my.cnf /etc/mysql/conf.d/my.cnf
 ADD supervisord-apache2.conf /etc/supervisor/conf.d/supervisord-apache2.conf
 ADD supervisord-mysqld.conf /etc/supervisor/conf.d/supervisord-mysqld.conf
 
-# Pour configurer la connexion de tematres à notre base de données.
-#RUN sed -i '40s/""/"root"/' /var/www/html/tematres/vocab/db.tematres.php
-
 # Pour que notre installation de Tematres soit accessible à 0.0.0.0:80/tematres
 EXPOSE 80 3306
 
