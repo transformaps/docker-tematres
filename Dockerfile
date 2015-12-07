@@ -37,14 +37,14 @@ RUN mkdir -p /var/www/html/ \
     chown -R www-data:www-data /var/www/html/tematres
 
 # Diverses configurations.
-ADD start-apache2.sh /start-apache2.sh
-ADD start-mysqld.sh /start-mysqld.sh
-ADD create-db.sh /create-db.sh
-ADD run.sh /run.sh
+ADD scripts/start-apache2.sh /start-apache2.sh
+ADD scripts/start-mysqld.sh /start-mysqld.sh
+ADD scripts/create-db.sh /create-db.sh
+ADD scripts/run.sh /run.sh
 RUN chmod 755 /*.sh
-ADD my.cnf /etc/mysql/conf.d/my.cnf
-ADD supervisord-apache2.conf /etc/supervisor/conf.d/supervisord-apache2.conf
-ADD supervisord-mysqld.conf /etc/supervisor/conf.d/supervisord-mysqld.conf
+ADD conf/my.cnf /etc/mysql/conf.d/my.cnf
+ADD conf/supervisord-apache2.conf /etc/supervisor/conf.d/supervisord-apache2.conf
+ADD conf/supervisord-mysqld.conf /etc/supervisor/conf.d/supervisord-mysqld.conf
 
 # Pour que notre installation de Tematres soit accessible à 0.0.0.0:80/tematres
 EXPOSE 80 3306
