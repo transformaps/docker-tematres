@@ -36,7 +36,7 @@ RUN mkdir -p /var/www/html/ \
     mv /var/www/html/TemaTres-Vocabulary-Server-master /var/www/html/tematres && \
     chown -R www-data:www-data /var/www/html/tematres
 
-# Diverses configurations.
+# Divers scripts et configurations.
 ADD scripts/start-apache2.sh /start-apache2.sh
 ADD scripts/start-mysqld.sh /start-mysqld.sh
 ADD scripts/create-db.sh /create-db.sh
