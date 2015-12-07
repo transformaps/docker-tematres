@@ -39,7 +39,7 @@ RUN mkdir -p /var/www/html/ \
 # Diverses configurations.
 ADD start-apache2.sh /start-apache2.sh
 ADD start-mysqld.sh /start-mysqld.sh
-ADD create-tematres-db.sh /create-tematres-db.sh
+ADD create-db.sh /create-db.sh
 ADD run.sh /run.sh
 RUN chmod 755 /*.sh
 ADD my.cnf /etc/mysql/conf.d/my.cnf

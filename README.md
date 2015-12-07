@@ -18,7 +18,7 @@ Les instructions suivantes permettent d'installer et de faire la configuration i
 1. Télécharger le zip de ce projet
 2. Pour lancer l'installation : `$ sudo docker build -t arv3054/tematres .`
 3. Pour lancer le contenant : `$ sudo docker run -i -t -d -p 80:80 --name tematres arv3054/tematres`
-4. Puis pour créer la base de données faire : `$ sudo docker exec -i -t tematres /create-tematres-db.sh`
+4. Puis pour créer la base de données faire : `$ sudo docker exec -i -t tematres /create-db.sh`
 
 Vous pouvez maintenant visiter votre thésaurus à l'URL : `0.0.0.0/tematres`
 
