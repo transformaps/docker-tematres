@@ -2,7 +2,7 @@
 
 FROM ubuntu:latest
 
-MAINTAINER Dominic Boisvert <dominic.boisvert@hbarchivistes.qc.ca>
+MAINTAINER Dominic Boisvert <dominic.boisvert.1@humontreal.ca>
 
 # Variables pour notre dockerfile.
 ENV TEMATRES_URL=https://codeload.github.com/tematres/TemaTres-Vocabulary-Server/zip/master
