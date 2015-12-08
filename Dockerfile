@@ -5,11 +5,8 @@ FROM ubuntu:latest
 MAINTAINER Dominic Boisvert <dominic.boisvert@hbarchivistes.qc.ca>
 
 # Variables pour notre dockerfile.
-ENV TEMATRES_URL https://codeload.github.com/tematres/TemaTres-Vocabulary-Server/zip/master
-ENV TEMATRES_DB_NAME tematres
-ENV TEMATRES_DB_USER root
-ENV TEMATRES_DB_PASS root
-ENV DEBIAN_FRONTEND noninteractive
+ENV TEMATRES_URL=https://codeload.github.com/tematres/TemaTres-Vocabulary-Server/zip/master
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Pour mettre à jour les dépôts et installer les paquets nécessaires et faire le ménage.
 RUN apt-get update && \
