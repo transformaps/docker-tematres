@@ -15,7 +15,7 @@ Les instructions ont été développées et testées sous Linux. Les instruction
 
 Les instructions suivantes permettent d'installer et de faire la configuration initile.
 
-1. Télécharger le zip de ce projet
+1. Télécharger le zip de ce projet : https://github.com/ARV3054/docker-tematres/archive/master.zip
 2. Pour lancer l'installation : `$ sudo docker build -t arv3054/tematres .`
 3. Pour lancer le contenant : `$ sudo docker run -i -t -d -p 80:80 --name tematres arv3054/tematres`
 4. Puis pour créer la base de données faire : `$ sudo docker exec -i -t tematres /create-db.sh`
