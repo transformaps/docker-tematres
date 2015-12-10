@@ -46,4 +46,8 @@ ADD conf/supervisord-mysqld.conf /etc/supervisor/conf.d/supervisord-mysqld.conf
 # Pour que notre installation de Tematres soit accessible à 0.0.0.0:80/tematres
 EXPOSE 80 3306
 
+# Volume pour partager des fichiers entre le host et le conteneur Docker.
+RUN mkdir /partage
+VOLUME ["/partage"]
+
 CMD ["/run.sh"]
