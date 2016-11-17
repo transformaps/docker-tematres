@@ -1,6 +1,6 @@
 # Pour le cours ARV3054, idéalement vous devrions utiliser la fonctionnalité de liaison entre les contenants.
 
-FROM ubuntu:latest
+FROM ubuntu:14.04
 
 MAINTAINER Dominic Boisvert <dominic.boisvert.1@humontreal.ca>
 
