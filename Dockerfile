@@ -47,7 +47,7 @@ ADD conf/supervisord-mysqld.conf /etc/supervisor/conf.d/supervisord-mysqld.conf
 EXPOSE 80 3306
 
 # Volume pour partager des fichiers entre le host et le conteneur Docker.
-RUN mkdir /partage
-VOLUME ["/partage"]
+#RUN mkdir /partage
+#VOLUME ["/partage"]
 
-CMD ["/run.sh"]
+#CMD ["/run.sh"]
